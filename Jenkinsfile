@@ -82,8 +82,7 @@ stages{
 
         steps{
             sh '''
-            echo $(pwd)
-            #docker run --mount type=bind,src=/var/jenkins_home/workspace/kubejenk-multibranch_develop,target=/usr/src -w /usr/src/ maven:alpine mvn test
+            docker run --mount type=bind,src=$(pwd),target=/usr/src -w /usr/src/ maven:alpine mvn test
             '''
         }
 
