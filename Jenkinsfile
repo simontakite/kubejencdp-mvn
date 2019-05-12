@@ -88,6 +88,7 @@ stages{
             steps {
             sh 'maven test'
         }
+      }
     }
 
     stage('Build'){
