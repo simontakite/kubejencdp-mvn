@@ -44,7 +44,7 @@ environment {
     GIT_COMMIT_SHORT_HASH = sh (script: "git rev-parse --short HEAD", returnStdout: true)
 }
 
-agent none
+agent any
 
 stages{
     stage('Init'){
