@@ -79,13 +79,10 @@ stages{
     }
 
     stage('Test'){
-      agent {
-               docker { image 'maven:alpine' }
-      }
-        steps {
+
+        steps{
             sh '''
-            cd ${BASE_DIR}/app
-            mvn clean install
+            docker run -v "${BASE_DIR}/app":/usr/src/myapp -w /usr/src/myapp maven:alpine mvn clean install
             '''
           }
       }
