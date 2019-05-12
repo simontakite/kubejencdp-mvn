@@ -79,9 +79,15 @@ stages{
     }
 
     stage('Test'){
+      // agent {
+      //           docker {
+      //               image 'maven:3.5.2'
+      //               args '-v /var/jenkins_home/workspace/test:/opt/maven -w /opt/maven'
+      //               reuseNode true
+      //           }
         steps{
             sh '''
-            docker run --mount type=bind,src=/app,target=/usr/src -w /usr/src maven:alpine mvn test
+            docker run --mount type=bind,src=/var/jenkins_home/workspace/kubejenk-multibranch_develop,target=/usr/src -w /usr/src/app maven:alpine mvn test
             '''
         }
 
