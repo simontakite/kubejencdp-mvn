@@ -13,7 +13,7 @@ spec:
       containers:
       - name: __APP_NAME__-ctr
         image: >-
-          __IMAGE__
+          127.0.0.1:30400/__IMAGE__
         env:
           - name: DEPLOY_TIMESTAMP
             value: "__TIMESTAMP__"
