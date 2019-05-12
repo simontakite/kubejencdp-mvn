@@ -77,6 +77,16 @@ stages{
         }
 
     }
+
+    stage('Test'){
+        steps{
+            sh '''
+            docker run --mount type=bind,src=$(pwd)/app,target=/usr/src -w /usr/src maven:alpine mvn test
+            '''
+        }
+
+    }
+
     stage('Build'){
         steps{
             withEnv(["APP_NAME=${APP_NAME}", "PROJECT_NAME=${PROJECT_NAME}"]){
