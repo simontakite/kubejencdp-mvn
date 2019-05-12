@@ -82,8 +82,7 @@ stages{
 
         steps{
             sh '''
-            ls -la $(pwd)/app
-            #docker run -v "$(pwd)/app":/usr/src/ -w /usr/src/ maven:alpine mvn clean install
+            docker run -v "$(pwd)/app":/usr/src -w /usr/src maven:alpine mvn clean install
             '''
 
           }
