@@ -62,7 +62,7 @@ stages{
         env.RELEASE_TAG = getEnvVar('RELEASE_TAG')
         env.DOCKER_PROJECT_NAMESPACE = getEnvVar('DOCKER_PROJECT_NAMESPACE')
         env.DOCKER_IMAGE_TAG= "${DOCKER_REGISTRY_URL}/${DOCKER_PROJECT_NAMESPACE}/${APP_NAME}:${RELEASE_TAG}"
-        env.JENKINS_DOCKER_CREDENTIALS_ID = getEnvVar('JENKINS_DOCKER_CREDENTIALS_ID')
+        //env.JENKINS_DOCKER_CREDENTIALS_ID = getEnvVar('JENKINS_DOCKER_CREDENTIALS_ID')
         //env.JENKINS_GCLOUD_CRED_ID = getEnvVar('JENKINS_GCLOUD_CRED_ID')
         //env.GCLOUD_PROJECT_ID = getEnvVar('GCLOUD_PROJECT_ID')
         //env.GCLOUD_K8S_CLUSTER_NAME = getEnvVar('GCLOUD_K8S_CLUSTER_NAME')
@@ -82,7 +82,7 @@ stages{
         }
 
     }
-    // stage('Build'){
+    // stage('Build'){rm
     //     steps{
     //         withEnv(["APP_NAME=${APP_NAME}", "PROJECT_NAME=${PROJECT_NAME}"]){
     //             sh '''
@@ -105,8 +105,8 @@ stages{
     // }
     stage('Deploy'){
         steps{
-        withCredentials([file(credentialsId: "${JENKINS_GCLOUD_CRED_ID}", variable: 'JENKINSGCLOUDCREDENTIAL')])
-        {
+        //withCredentials([file(credentialsId: "${JENKINS_GCLOUD_CRED_ID}", variable: 'JENKINSGCLOUDCREDENTIAL')])
+        //{
         sh """
 
             chmod +x $BASE_DIR/k8s/process_files.sh
@@ -119,7 +119,7 @@ stages{
             kubectl rollout status --watch=true --v=8 -f $BASE_DIR/k8s/$IMAGE_NAME/$IMAGE_NAME-deployment.yml
 
             """
-        }
+        //}
         }
     }
 }
