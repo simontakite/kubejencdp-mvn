@@ -79,8 +79,9 @@ stages{
     }
 
     stage('Test'){
-
+      withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${JENKINS_DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWD']])
         steps{
+            echo $DOCKER_PASSWD | docker login --username ${DOCKER_USERNAME} --password-stdin ${DOCKER_REGISTRY_URL} 
             sh '''
             docker run $APP_NAME -v "$(pwd)":/usr/src/app -w /usr/src/app maven:alpine mvn clean install
             '''
