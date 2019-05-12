@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if (($# <5))
+if (($# <4))
   then
     echo "Usage : $0 <DOCKER_PROJECT_NAME> <APP_NAME> <IMAGE_TAG> <directory containing k8s files> <timestamp>"
     exit 1
