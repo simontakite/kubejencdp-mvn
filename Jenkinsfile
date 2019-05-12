@@ -44,7 +44,7 @@ environment {
     GIT_COMMIT_SHORT_HASH = sh (script: "git rev-parse --short HEAD", returnStdout: true)
 }
 
-agent any
+agent none
 
 stages{
     stage('Init'){
@@ -79,10 +79,13 @@ stages{
     }
 
     stage('Test'){
-
-        steps{
+      agent {
+               docker { image 'maven:alpine' }
+      }
+        steps {
             sh '''
-            docker run -v "${BASE_DIR}/app":/usr/src/myapp -w /usr/src/myapp maven:alpine mvn clean install
+            cd ${BASE_DIR}/app
+            mvn clean install
             '''
           }
       }
