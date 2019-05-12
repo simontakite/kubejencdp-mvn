@@ -7,10 +7,10 @@ if (($# <4))
 fi
 
 PROJECT_NAME=$1
-APP_NAME=$2
-IMAGE=$3
-WORK_DIR=$4
-TIMESTAMP=$5
+APP_NAME=$1
+IMAGE=$2
+WORK_DIR=$3
+TIMESTAMP=$4
 
 main(){
 find $WORK_DIR -name *.yml -type f -exec sed -i.bak1 's#__PROJECT_NAME__#'$PROJECT_NAME'#' {} \;
