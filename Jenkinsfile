@@ -82,7 +82,7 @@ stages{
 
         steps{
             sh '''
-            docker run --mount type=bind,src=$(pwd),target=/usr/src -w /usr/src/ maven:alpine mvn test
+            docker run -it --rm --name $APP_NAME -v "$(pwd)":/usr/src/app -w /usr/src/app maven:alpine mvn clean install
             '''
         }
 
