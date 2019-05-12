@@ -81,7 +81,7 @@ stages{
     stage('Test'){
         steps{
             sh '''
-            docker run --mount type=bind,src=$(pwd)/app,target=/usr/src -w /usr/src maven:alpine mvn test
+            docker run --mount type=bind,src=$(pwd),target=/usr/src -w /usr/src/app maven:alpine mvn test
             '''
         }
 
