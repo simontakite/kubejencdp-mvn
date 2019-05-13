@@ -85,7 +85,9 @@ stages{
             // '''
             script {
               docker.withRegistry('127.0.0.1:30400') {
-                  docker.image("maven:alpine").inside("-v $pwd/app:/usr/src")
+                  //docker.image("maven:alpine").inside("-v ${BASE_DIR}/app:/usr/src")
+                  docker.image("maven:alpine")
+                  args '-v ${BASE_DIR}/app:/usr/src -w /usr/src'
                 }
                   sh 'ls -la'
             }
