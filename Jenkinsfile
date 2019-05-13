@@ -84,10 +84,10 @@ stages{
             // docker run -v "${BASE_DIR}/app":/usr/src/ -w /usr/src/app maven:alpine ls -la
             // '''
             script {
-              docker.withRegistry('https://hub.docker.io', 'JENKINS_DOCKER_CREDENTIALS_ID') {
+              docker.withRegistry('127.0.0.1:30400') {
                   docker.image("maven:alpine").inside("-v $pwd/app:/usr/src")
                 }
-                  sh 'ls -la'      
+                  sh 'ls -la'
             }
         }
     }
