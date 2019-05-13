@@ -80,11 +80,9 @@ stages{
 
     stage('Test'){
         steps{
-          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${JENKINS_DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWD']]) {
             sh '''
             docker run -v "${BASE_DIR}/app":/usr/src/myapp -w /usr/src/myapp maven:alpine mvn clean install
             '''
-          }
         }
       }
 
