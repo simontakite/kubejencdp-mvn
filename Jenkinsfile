@@ -95,14 +95,13 @@ stages{
           sh "cd /usr/src/app"
           sh 'mvn -B -DskipTests clean package'
         }
-      }
-      post {
-        success {
-          // we only worry about archiving the jar file if the build steps are successful
-          archiveArtifacts(artifacts: '**/target/*.jar', allowEmptyArchive: true)
+        post {
+          success {
+            // we only worry about archiving the jar file if the build steps are successful
+            archiveArtifacts(artifacts: '**/target/*.jar', allowEmptyArchive: true)
+          }
         }
       }
-    }
 
 
 
