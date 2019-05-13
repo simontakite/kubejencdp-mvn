@@ -79,13 +79,14 @@ stages{
     }
 
     stage('Test') {
-      def mvnContainer = docker.image('jimschubert/8-jdk-alpine-mvn')
-      mvnContainer.inside('-v ${BASE_DIR}/app:/usr/src') {
+      withEnv(["JAVA_HOME=${ tool 'jdk-1.8.0_64bits' }", "PATH+MAVEN=${tool 'maven-3.2.1'}/bin:${env.JAVA_HOME}/bin"]) {
+
 
             // sh '''
             // docker run -v "${BASE_DIR}/app":/usr/src/ -w /usr/src/app maven:alpine ls -la
             // '''
-                sh 'ls -la'
+            cd ${BASE_DIR}/app
+            sh "mvn --batch-mode -V -U -e clean deploy -Dsurefire.useFile=false"
 
         }
     }
