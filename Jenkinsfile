@@ -87,7 +87,7 @@ stages{
            * of maven directly on the agent
            */
           reuseNode true
-          image 'maven:alpine'
+          image 'maven:3-alpine'
           args '-v ${BASE_DIR}/app:/usr/src'
         }
       }
