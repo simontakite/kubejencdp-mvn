@@ -86,9 +86,10 @@ stages{
             docker.withRegistry('https://hub.docker.io', 'JENKINS_DOCKER_CREDENTIALS_ID') {
                 docker.image("maven:alpine").inside("-v $pwd/app:/usr/src") {
                   sh 'ls -la'
+                }
             }
         }
-      }
+    }
 
     stage('Build'){
         steps{
