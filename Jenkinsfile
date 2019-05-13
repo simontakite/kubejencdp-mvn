@@ -79,17 +79,20 @@ stages{
     }
 
     stage('Test') {
-      withEnv(["JAVA_HOME=${ tool 'jdk-1.8.0_64bits' }", "PATH+MAVEN=${tool 'maven-3.2.1'}/bin:${env.JAVA_HOME}/bin"]) {
+      steps{
+        withEnv(["JAVA_HOME=${ tool 'jdk-1.8.0_64bits' }", "PATH+MAVEN=${tool 'maven-3.2.1'}/bin:${env.JAVA_HOME}/bin"]) {
+          cd ${BASE_DIR}/app
+          sh "mvn --batch-mode -V -U -e clean deploy -Dsurefire.useFile=false"
+        }
+      }
+    }
+
 
 
             // sh '''
             // docker run -v "${BASE_DIR}/app":/usr/src/ -w /usr/src/app maven:alpine ls -la
             // '''
-            cd ${BASE_DIR}/app
-            sh "mvn --batch-mode -V -U -e clean deploy -Dsurefire.useFile=false"
 
-        }
-    }
 
     stage('Build'){
         steps{
