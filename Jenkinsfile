@@ -88,13 +88,12 @@ stages{
            */
           reuseNode true
           image 'maven:alpine'
+          args '-v ${BASE_DIR}/app:/usr/src'
         }
       }
       steps {
-        // using the Pipeline Maven plugin we can set maven configuration settings, publish test results, and annotate the Jenkins console
-        withMaven(options: [findbugsPublisher(), junitPublisher(ignoreAttachments: false)]) {
-          sh "${BASE_DIR}/app"
-          sh 'mvn clean findbugs:findbugs package'
+          sh "cd /usr/src/app"
+          sh 'mvn -B -DskipTests clean package'
         }
       }
       post {
