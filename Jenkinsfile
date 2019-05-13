@@ -79,17 +79,13 @@ stages{
     }
 
     stage('Test'){
+      def mvnContainer = docker.image('jimschubert/8-jdk-alpine-mvn')
+      mvnContainer.inside('-v ${BASE_DIR}/app:/usr/src') {
         steps{
             // sh '''
             // docker run -v "${BASE_DIR}/app":/usr/src/ -w /usr/src/app maven:alpine ls -la
             // '''
-            script {
-              docker.withRegistry('127.0.0.1:30400') {
-                  //docker.image("maven:alpine").inside("-v ${BASE_DIR}/app:/usr/src")
-                  docker.image("maven:alpine")
-                  args '-v ${BASE_DIR}/app:/usr/src -w /usr/src'
-                }
-                  sh 'ls -la'
+                sh 'ls -la'
             }
         }
     }
