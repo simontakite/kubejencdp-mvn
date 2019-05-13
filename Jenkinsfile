@@ -81,7 +81,7 @@ stages{
     stage('Test'){
         steps{
             sh '''
-            docker run -v "${BASE_DIR}/app":/usr/src/ -w /usr/src/ maven:alpine ls -la
+            docker run -v "${BASE_DIR}/app":/usr/src/ -w /usr/src/app maven:alpine ls -la
             '''
         }
       }
