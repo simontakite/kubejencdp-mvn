@@ -119,7 +119,7 @@ pipeline {
                 //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${JENKINS_DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWD']])
                 //{
                 sh '''
-            docker push ${DOCKER_REGISTRY_URL}/${DOCKER_PROJECT_NAMESPACE}/${IMAGE_NAME}:${RELEASE_TAG}
+            docker push 127.0.0.1:30400/${IMAGE_NAME}:${RELEASE_TAG}
             '''
                 //}
             }
