@@ -80,21 +80,15 @@ pipeline {
         }
 
         stage('Test') {
-            agent {
-                docker {
-                    /*
-                     * Reuse the workspace on the agent defined at top-level of Pipeline but run inside a container.
-                     * In this case we are running a container with maven so we don't have to install specific versions
-                     * of maven directly on the agent
-                     */
-                    reuseNode true
-                    image 'maven:3-alpine'
-                    args '-v ${BASE_DIR}/app:/usr/src'
-                }
-            }
+
             steps {
-                sh "cd /usr/src/app"
-                sh 'mvn -B -DskipTests clean package'
+                script{
+                    docker.withRegistry('https://plattform.azurecr.io', 'acr-plattform') {
+                        docker.image('maven:3-alpine').inside{
+                            sh 'mvn clean install'
+                        }
+                    }
+                }
             }
             post {
                 success {
