@@ -85,7 +85,7 @@ pipeline {
                 script {
                     //docker.withRegistry('https://plattform.azurecr.io', 'acr-plattform') {
                     docker.image('maven:3-alpine').inside {
-                        sh 'mvn clean install -gs app/pom.xml'
+                        sh 'mvn clean install -f app/pom.xml'
                     }
                 }
                 //}
