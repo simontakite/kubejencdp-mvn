@@ -86,7 +86,8 @@ pipeline {
                     //docker.withRegistry('https://plattform.azurecr.io', 'acr-plattform') {
                     docker.image('maven:3-alpine').inside {
                         sh 'cd app'
-                        sh 'mvn clean install'
+                        //sh 'mvn clean install'
+                        sh 'ls -la'
                     }
                 }
                 //}
