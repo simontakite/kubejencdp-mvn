@@ -82,13 +82,13 @@ pipeline {
         stage('Test') {
 
             steps {
-                script{
-                    docker.withRegistry('https://plattform.azurecr.io', 'acr-plattform') {
-                        docker.image('maven:3-alpine').inside{
-                            sh 'mvn clean install'
-                        }
+                script {
+                    //docker.withRegistry('https://plattform.azurecr.io', 'acr-plattform') {
+                    docker.image('maven:3-alpine').inside {
+                        sh 'mvn clean install'
                     }
                 }
+                //}
             }
             post {
                 success {
